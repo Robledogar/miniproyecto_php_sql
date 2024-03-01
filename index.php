@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregador de libros</title>
+    <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
     <h1>Agregar Libro</h1>
@@ -41,7 +42,37 @@
         $stmt->close();
     }
 
+    
+
     $conn->close();
     ?>
+    <button type="button" id="mostrar_libros">Mostrar Libros</button>
+    <div id="lista_libros"></div>
+
+    
+
+
+
+    <script>
+document.getElementById("mostrar_libros").addEventListener("click", function() {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "obtener_libros.php", true);
+
+    xhr.onload = function() {
+        if (this.status === 200) {
+            document.getElementById("lista_libros").innerHTML = this.responseText;
+        } else {
+            document.getElementById("lista_libros").innerHTML = "Error al cargar los libros.";
+        }
+    };
+
+    xhr.send();
+});
+</script>
+
+
+
+
+
 </body>
 </html>
